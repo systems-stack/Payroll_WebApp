@@ -1,9 +1,36 @@
+/* =========================================
+   APP SHELL — Layout Anchor
+   ========================================= */
+
+/* Ensure html + body fill full viewport height so 100vh works reliably,
+   including on mobile browsers where the address bar eats space */
+html {
+  height: 100%;
+  /* Prevent horizontal overflow from animations (e.g. logo slider) */
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100%;
+  overflow-x: hidden;
+}
+
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  /* dvh = dynamic viewport height, fixes the mobile Safari blank gap.
+     Falls back to 100vh for older browsers. */
+  min-height: 100dvh;
+  min-height: 100vh; /* fallback */
 }
 
+/* <main> grows to fill all remaining space between Header and Footer,
+   eliminating the blank gap that appeared when page content is short */
 main {
-  flex: 1;
+  flex: 1 0 auto;
+}
+
+/* Footer should never shrink */
+footer {
+  flex-shrink: 0;
 }

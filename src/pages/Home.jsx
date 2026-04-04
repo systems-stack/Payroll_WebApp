@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import Hero from '../components/home/Hero';
 import AboutBrief from '../components/home/AboutBrief';
 import ServicesList from '../components/home/ServicesList';
@@ -9,7 +10,13 @@ import CTASection from '../components/home/CTASection';
 
 const Home = () => {
   return (
-    <div className="home-page">
+    <motion.div 
+      className="home-page"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.4 }}
+    >
       <Hero />
       <AboutBrief />
       <ServicesList />
@@ -17,7 +24,7 @@ const Home = () => {
       <Industries />
       <Testimonials />
       <CTASection />
-    </div>
+    </motion.div>
   );
 };
 

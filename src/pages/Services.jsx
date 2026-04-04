@@ -1,119 +1,74 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calculator, FileText, CheckSquare, Building, BookOpen, Landmark, Briefcase, Award } from 'lucide-react';
+import { Calculator, Briefcase, Shield, Rocket } from 'lucide-react';
 
-const detailedServices = [
+const serviceCategories = [
   {
     icon: <Calculator size={32} />,
-    title: 'GST Consultancy & Compliance',
-    desc: 'End-to-end GST solutions to ensure smooth compliance and maximum efficiency.',
+    title: 'Core Tax & Regulatory Services',
+    desc: 'Strategic tax planning and strict adherence to the latest regulations, ensuring individuals and corporations remain compliant across national and international boundaries.',
     items: [
-      'GST Registration & Setup',
-      'Return Filing (Monthly/Quarterly/Annual)',
-      'Refund Processing (including exporters)',
-      'GST Notices & Litigation Support',
-      'Advisory & Compliance Review'
-    ]
-  },
-  {
-    icon: <FileText size={32} />,
-    title: 'Income Tax Services',
-    desc: 'Comprehensive tax solutions tailored for individuals and businesses.',
-    items: [
-      'Income Tax Return Filing',
-      'Tax Planning & Optimization',
-      'TDS/TCS Compliance',
-      'Handling Tax Notices & Assessments',
-      'Capital Gains & Investment Advisory'
-    ]
-  },
-  {
-    icon: <CheckSquare size={32} />,
-    title: 'Audit & Assurance',
-    desc: 'Reliable audit services ensuring transparency and regulatory compliance.',
-    items: [
-      'Statutory Audit',
-      'Tax Audit',
-      'Internal Audit',
-      'GST Audit',
-      'Risk & Compliance Review'
-    ]
-  },
-  {
-    icon: <Building size={32} />,
-    title: 'Business Registration & Structuring',
-    desc: 'Helping you start and structure your business the right way.',
-    items: [
-      'Company Incorporation (Pvt Ltd, LLP, OPC)',
-      'Partnership & Firm Registration',
-      'Startup & MSME Registration',
-      'PAN, TAN & Other Licenses'
-    ]
-  },
-  {
-    icon: <BookOpen size={32} />,
-    title: 'Accounting & Bookkeeping',
-    desc: 'Accurate financial records to support informed decision-making.',
-    items: [
-      'Outsourced Accounting',
-      'Bookkeeping Services',
-      'Financial Statements Preparation',
-      'MIS & Reporting',
-      'Payroll Management'
-    ]
-  },
-  {
-    icon: <Landmark size={32} />,
-    title: 'Financial Advisory & Consulting',
-    desc: 'Strategic insights to drive business growth and profitability.',
-    items: [
-      'Financial Planning',
-      'Cash Flow & Budgeting',
-      'Profitability Analysis',
-      'Investment Structuring',
-      'Business Growth Advisory'
+      { name: 'Income Tax', detail: 'Strategic tax planning to optimize credits and deductions, ensuring compliance with the latest Finance Act amendments.' },
+      { name: 'International Taxation', detail: 'Navigating Transfer Pricing (fair pricing between global branches) and applying Tax Treaties to prevent double taxation.' },
+      { name: 'Goods & Services Tax (GST)', detail: 'Comprehensive indirect tax service including registration, input tax credit reconciliation, and representation during audits.' },
+      { name: 'FEMA', detail: 'Ensuring movement of money in or out of India (Remittances, FDI, ECB) follows RBI guidelines strictly.' },
+      { name: 'Black Money & Tax Act', detail: 'Specialist advisory for disclosing foreign assets and compliance regarding strict transparency laws.' }
     ]
   },
   {
     icon: <Briefcase size={32} />,
-    title: 'Compliance & Regulatory Services',
-    desc: 'Ensuring your business stays fully compliant at all times.',
+    title: 'Corporate Strategy & Governance',
+    desc: 'High-level advisory services focusing on business combinations, rigorous due diligence, and maintaining essential corporate compliance.',
     items: [
-      'ROC Compliance & Filings',
-      'Secretarial Compliance',
-      'FEMA & RBI Compliance',
-      'Labour Law Compliance'
+      { name: 'Company Law Matters', detail: 'Drafting board resolutions, managing share transfers, and ensuring "Active" status with the ROC.' },
+      { name: 'Mergers & Acquisitions (M&A)', detail: 'End-to-end management of business combinations including valuation, negotiation, and drafting legal schemes.' },
+      { name: 'Due Diligence', detail: 'Rigorous pre-purchase investigation verifying financial stability, litigations, and hidden liabilities.' },
+      { name: 'Secretarial & SEBI Services', detail: 'Ensuring strict adherence to LODR and capital market regulations for public or listed entities.' }
     ]
   },
   {
-    icon: <Award size={32} />,
-    title: 'Specialized & Value-Added Services',
-    desc: 'Focused solutions for complex and high-value requirements.',
+    icon: <Shield size={32} />,
+    title: 'Investigation & Specialized Audits',
+    desc: 'Objective validations of financial health and specialized audits utilizing investigative techniques to uncover discrepancies and ensure lawful operations.',
     items: [
-      'GST Refund Recovery (especially for exporters)',
-      'Business Restructuring',
-      'Due Diligence',
-      'Project Financing Support',
-      'Government Liaison Services'
+      { name: 'Auditing & Assurance', detail: 'Objective validation of financial statements providing reasonable assurance for stakeholders like banks.' },
+      { name: 'Forensic Audit Services', detail: 'Combining accounting skills with investigative techniques to uncover embezzlement or provide evidence.' },
+      { name: 'Benami Property & PMLA', detail: 'Specialized legal services for defending or regularizing transactions flagged under the Prevention of Money Laundering Act.' }
+    ]
+  },
+  {
+    icon: <Rocket size={32} />,
+    title: 'Business Growth & Operations',
+    desc: 'Cradle-to-grave support for businesses, ensuring operational smoothness, IP protection, and soft landings for foreign investments.',
+    items: [
+      { name: 'Startup Services', detail: 'Cradle-to-grave support from legal structure selection (LLP vs. Pvt Ltd) to obtaining DPIIT recognition.' },
+      { name: 'Societies and Trust (NGO)', detail: 'Helping non-profits secure legal identity and 12A/80G certifications for tax-free operations.' },
+      { name: 'Import-Export & SEZ', detail: 'Securing IEC and setting up SEZ units to enjoy zero-rated taxes and customs duty exemptions.' },
+      { name: 'Trademarks', detail: 'Protecting brand identity through availability searches and application filing.' },
+      { name: 'Accounting & BPO', detail: 'Outsourcing back-office workload with real-time financial records using modern software.' },
+      { name: 'NRIs & Foreign Investment', detail: 'A soft landing for foreign capital advising on entry routes and ensuring proper exit documentation.' }
     ]
   }
 ];
 
 const Services = () => {
   return (
-    <div className="section container">
+    <motion.div 
+      className="section container"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.98 }}
+      transition={{ duration: 0.4 }}
+    >
       <div className="text-center mb-10">
-        <div className="hero-badge" style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
-          Our Expertise
-        </div>
         <h1 className="section-title">Comprehensive Financial Services</h1>
         <p className="section-subtitle">
-          Explore our wide range of professional services built on 65+ years of trusted experience.
+          Explore our wide range of professional services built on complex problem solving and strategic advisory.
         </p>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-md">
-        {detailedServices.map((service, index) => (
+        {serviceCategories.map((category, index) => (
           <motion.div 
             key={index}
             className="service-card"
@@ -122,25 +77,27 @@ const Services = () => {
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
           >
-            <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem' }}>
-              <div className="service-icon" style={{ marginBottom: 0 }}>{service.icon}</div>
-              <h2 style={{ fontSize: '1.3rem', marginBottom: 0 }}>{service.title}</h2>
+            <div className="flex items-center gap-4 mb-4">
+              <div className="service-icon mb-0">{category.icon}</div>
+              <h2 className="text-xl mb-0">{category.title}</h2>
             </div>
-            <p style={{ color: 'var(--foreground-light)', marginBottom: '1.5rem', fontWeight: '500' }}>
-              {service.desc}
+            <p className="text-foreground-light mb-6 font-medium">
+              {category.desc}
             </p>
-            <ul style={{ listStyle: 'none', padding: 0 }}>
-              {service.items.map((item, i) => (
-                <li key={i} style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginBottom: '0.5rem', color: 'var(--foreground-light)', fontSize: '0.95rem' }}>
-                  <div style={{ width: '6px', height: '6px', backgroundColor: 'var(--secondary)', borderRadius: '50%' }}></div>
-                  {item}
+            <ul className="list-none p-0">
+              {category.items.map((item, i) => (
+                <li key={i} className="flex gap-2 mb-4 text-foreground-light text-sm">
+                  <div className="mt-2 w-2 h-2 bg-secondary rounded-full flex-shrink-0"></div>
+                  <div>
+                    <strong className="text-foreground">{item.name}:</strong> {item.detail}
+                  </div>
                 </li>
               ))}
             </ul>
           </motion.div>
         ))}
       </div>
-    </div>
+    </motion.div>
   );
 };
 

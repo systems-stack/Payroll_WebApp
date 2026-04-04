@@ -22,7 +22,7 @@ const reviews = [
 
 const Testimonials = () => {
   return (
-    <section className="section" style={{ backgroundColor: 'var(--background-alt)' }}>
+    <section className="section bg-background">
       <div className="container">
         <div className="text-center mb-10">
           <h2 className="section-title">Trusted By Visionaries</h2>

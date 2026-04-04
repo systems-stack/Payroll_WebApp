@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-top">
           <div className="footer-col">
             <Link to="/" className="footer-logo">
-              Rohit KC Jain <span>& Co.</span>
+              Rohit KC Jain & Co.
             </Link>
             <p className="footer-text">
               Your Trusted Financial & Taxation Partner. Empowering businesses with accurate consultancy, compliance, and growth-focused strategies since establishment.
@@ -26,6 +26,7 @@ const Footer = () => {
             <ul className="footer-links">
               <li><Link to="/">Home</Link></li>
               <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/team">Our Team</Link></li>
               <li><Link to="/services">Services</Link></li>
               <li><Link to="/insights">Insights & Blog</Link></li>
               <li><Link to="/contact">Contact</Link></li>
@@ -46,7 +47,7 @@ const Footer = () => {
             <h3>Contact Us</h3>
             <div className="footer-contact-item">
               <MapPin className="footer-icon" size={18} />
-              <span>Office Address, City, State, India - XXXXXX</span>
+              <span>Suite No. 11A-11B, Tolstoy marg, Connaught Place, New Delhi, 110001</span>
             </div>
             <div className="footer-contact-item">
               <Phone className="footer-icon" size={18} />

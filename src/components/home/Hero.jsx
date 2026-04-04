@@ -1,13 +1,23 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import './Home.css';
 
 const Hero = () => {
+  const ref = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"]
+  });
+  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
+
   return (
-    <section className="hero">
-      <div className="hero-overlay"></div>
+    <section className="hero" ref={ref}>
+      <motion.div 
+        className="hero-overlay"
+        style={{ y }}
+      ></motion.div>
       <div className="container" style={{ position: 'relative', zIndex: 10 }}>
         <motion.div 
           className="hero-content"

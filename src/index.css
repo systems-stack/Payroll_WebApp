@@ -1,50 +1,95 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
+/* =========================================
+   DESIGN TOKENS
+   ========================================= */
 :root {
-  --primary: #0A192F; /* Deep Blue */
-  --primary-light: #112240; 
-  --secondary: #D4AF37; /* Gold Accent */
-  --secondary-light: #F3E5AB;
-  --accent: #2E7D32; /* Trust Green */
-  --background: #FFFFFF;
-  --background-alt: #F8FAFC;
-  --foreground: #1E293B; /* Text Grey */
+  /* Brand Colors */
+  --primary:          #0A192F;
+  --primary-light:    #112240;
+  --secondary:        #D4AF37;
+  --secondary-light:  #F3E5AB;
+  --accent:           #2E7D32;
+
+  /* Surface Colors */
+  --background:       #FFFFFF;
+  --background-alt:   #F8FAFC;
+  --foreground:       #1E293B;
   --foreground-light: #64748B;
-  --border: #E2E8F0;
-  
-  --glass-bg: rgba(255, 255, 255, 0.9);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --border:           #E2E8F0;
+
+  /* Glass */
+  --glass-bg:     rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(255, 255, 255, 0.3);
+
+  /* Unified Spacing Scale */
+  --space-xs:  0.25rem;
+  --space-sm:  0.5rem;
+  --space-md:  1rem;
+  --space-lg:  1.5rem;
+  --space-xl:  2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* Unified Border-Radius Scale */
+  --radius-sm:   4px;
+  --radius-md:   8px;
+  --radius-lg:   12px;
+  --radius-xl:   16px;
+  --radius-2xl:  24px;
+  --radius-full: 9999px;
+
+  /* Elevation */
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.03);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.05), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg: 0 10px 20px rgba(0,0,0,0.06), 0 6px 6px rgba(0,0,0,0.04);
+  --shadow-xl: 0 20px 40px rgba(0,0,0,0.08), 0 10px 10px rgba(0,0,0,0.05);
+
+  /* Scoped Transitions */
+  --transition:           all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast:      all 0.2s ease;
+  --transition-transform: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-color:     color 0.2s ease, background-color 0.2s ease,
+                          border-color 0.2s ease, opacity 0.2s ease;
 }
 
-* {
+/* =========================================
+   GLOBAL RESET
+   ========================================= */
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
+/* =========================================
+   BASE
+   ========================================= */
 body {
   font-family: 'Inter', sans-serif;
   color: var(--foreground);
   background-color: var(--background);
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Playfair Display', serif;
   color: var(--primary);
-  margin-bottom: 0.5em;
-  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-  transition: var(--transition);
+  transition: var(--transition-color);
 }
 
 button {
@@ -52,9 +97,17 @@ button {
   border: none;
   background: none;
   font-family: inherit;
-  transition: var(--transition);
+  transition: var(--transition-color);
 }
 
+img, video {
+  display: block;
+  max-width: 100%;
+}
+
+/* =========================================
+   LAYOUT
+   ========================================= */
 .container {
   max-width: 1280px;
   margin: 0 auto;
@@ -62,11 +115,11 @@ button {
 }
 
 .section {
-  padding: 5rem 0;
+  padding: var(--space-4xl) 0;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: clamp(2rem, 5vw, 3rem);
   text-align: center;
   margin-bottom: 1rem;
 }
@@ -75,26 +128,31 @@ button {
   text-align: center;
   color: var(--foreground-light);
   max-width: 600px;
-  margin: 0 auto 3rem;
+  margin: 0 auto var(--space-3xl);
   font-size: 1.1rem;
+  line-height: 1.7;
 }
 
-/* Base Buttons */
+/* =========================================
+   BUTTONS
+   ========================================= */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 0.75rem 1.5rem;
-  border-radius: 4px;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-md);
   font-weight: 500;
+  font-size: 0.9375rem;
   gap: 0.5rem;
+  transition: var(--transition-transform), var(--transition-color);
+  white-space: nowrap;
 }
 
 .btn-primary {
   background-color: var(--primary);
   color: white;
 }
-
 .btn-primary:hover {
   background-color: var(--secondary);
   color: var(--primary);
@@ -107,10 +165,9 @@ button {
   color: var(--primary);
   font-weight: 600;
 }
-
 .btn-secondary:hover {
-  background-color: white;
-  color: var(--primary);
+  background-color: var(--primary);
+  color: white;
   box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
@@ -119,36 +176,351 @@ button {
   border: 2px solid var(--primary);
   color: var(--primary);
 }
-
 .btn-outline:hover {
   background-color: var(--primary);
   color: white;
+  transform: translateY(-2px);
 }
 
-/* Utilities */
-.text-center { text-align: center; }
-.mb-1 { margin-bottom: 0.25rem; }
-.mb-2 { margin-bottom: 0.5rem; }
-.mb-4 { margin-bottom: 1rem; }
-.mb-6 { margin-bottom: 1.5rem; }
-.mb-8 { margin-bottom: 2rem; }
+/* =========================================
+   TYPOGRAPHY SCALE (complete — no gaps)
+   ========================================= */
+.text-xs   { font-size: 0.75rem;  line-height: 1.5; }
+.text-sm   { font-size: 0.875rem; line-height: 1.5; }
+.text-base { font-size: 1rem;     line-height: 1.6; }
+.text-lg   { font-size: 1.125rem; line-height: 1.6; }
+.text-xl   { font-size: 1.25rem;  line-height: 1.5; }
+.text-2xl  { font-size: 1.5rem;   line-height: 1.4; }
+.text-3xl  { font-size: 1.875rem; line-height: 1.3; }
+.text-4xl  { font-size: 2.25rem;  line-height: 1.2; }
+.text-5xl  { font-size: 3.5rem;   line-height: 1.1; }
 
-/* Grid */
-.grid { display: grid; gap: 2rem; }
+/* =========================================
+   FLEXBOX UTILITIES
+   ========================================= */
+.flex          { display: flex; }
+.inline-flex   { display: inline-flex; }
+.flex-col      { flex-direction: column; }
+.flex-wrap     { flex-wrap: wrap; }
+.flex-shrink-0 { flex-shrink: 0; }
+.flex-1        { flex: 1; }
+
+.justify-start   { justify-content: flex-start; }
+.justify-center  { justify-content: center; }
+.justify-between { justify-content: space-between; }
+.justify-end     { justify-content: flex-end; }
+
+.items-start  { align-items: flex-start; }
+.items-center { align-items: center; }
+.items-end    { align-items: flex-end; }
+
+/* =========================================
+   GRID UTILITIES
+   ========================================= */
+.grid { display: grid; gap: var(--space-xl); }
+
 .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
 @media (min-width: 768px) {
-  .gap-md { gap: 1.5rem; }
-  .grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-  .grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .md\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
 }
 
-/* Animations */
+@media (min-width: 1024px) {
+  .lg\:grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+  .lg\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .lg\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .lg\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .lg\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+}
+
+/* =========================================
+   SPACING UTILITIES
+   ========================================= */
+.gap-2  { gap: 0.5rem; }
+.gap-4  { gap: 1rem; }
+.gap-6  { gap: 1.5rem; }
+.gap-8  { gap: 2rem; }
+.gap-10 { gap: 2.5rem; }
+.gap-12 { gap: 3rem; }
+
+.mb-1  { margin-bottom: 0.25rem; }
+.mb-2  { margin-bottom: 0.5rem; }
+.mb-3  { margin-bottom: 0.75rem; }
+.mb-4  { margin-bottom: 1rem; }
+.mb-6  { margin-bottom: 1.5rem; }
+.mb-8  { margin-bottom: 2rem; }
+.mb-10 { margin-bottom: 2.5rem; }
+.mb-12 { margin-bottom: 3rem; }
+
+.mt-2  { margin-top: 0.5rem; }
+.mt-4  { margin-top: 1rem; }
+.mt-6  { margin-top: 1.5rem; }
+.mt-8  { margin-top: 2rem; }
+.mt-10 { margin-top: 2.5rem; }
+.mt-12 { margin-top: 3rem; }
+
+.p-0  { padding: 0; }
+.p-3  { padding: 0.75rem; }
+.p-4  { padding: 1rem; }
+.p-6  { padding: 1.5rem; }
+
+.px-4 { padding-left: 1rem;   padding-right: 1rem; }
+.px-6 { padding-left: 1.5rem; padding-right: 1.5rem; }
+.px-8 { padding-left: 2rem;   padding-right: 2rem; }
+
+.py-3  { padding-top: 0.75rem;            padding-bottom: 0.75rem; }
+.py-4  { padding-top: 1rem;               padding-bottom: 1rem; }
+.py-16 { padding-top: 4rem;               padding-bottom: 4rem; }
+.py-20 { padding-top: var(--space-4xl);   padding-bottom: var(--space-4xl); }
+
+/* =========================================
+   DIMENSION UTILITIES
+   ========================================= */
+.w-full { width: 100%; }
+.w-2    { width: 0.5rem; }
+.h-2    { height: 0.5rem; }
+
+/* =========================================
+   COLOR UTILITIES
+   ========================================= */
+.text-primary          { color: var(--primary); }
+.text-secondary        { color: var(--secondary); }
+.text-foreground       { color: var(--foreground); }
+.text-foreground-light { color: var(--foreground-light); }
+.text-white            { color: #ffffff; }
+.text-accent           { color: var(--accent); }
+
+.bg-primary         { background-color: var(--primary); }
+.bg-secondary-light { background-color: var(--secondary-light); }
+.bg-alt             { background-color: var(--background-alt); }
+.bg-white           { background-color: #ffffff; }
+
+.border-primary   { border-color: var(--primary); }
+.border-secondary { border-color: var(--secondary); }
+
+/* =========================================
+   BORDER & RADIUS UTILITIES
+   ========================================= */
+.rounded      { border-radius: var(--radius-sm); }
+.rounded-md   { border-radius: var(--radius-md); }
+.rounded-lg   { border-radius: var(--radius-lg); }
+.rounded-xl   { border-radius: var(--radius-xl); }
+.rounded-2xl  { border-radius: var(--radius-2xl); }
+.rounded-full { border-radius: var(--radius-full); }
+
+.border-l-4 { border-left-width: 4px; border-left-style: solid; }
+
+/* =========================================
+   SHADOW UTILITIES
+   ========================================= */
+.shadow-sm { box-shadow: var(--shadow-sm); }
+.shadow-md { box-shadow: var(--shadow-md); }
+.shadow-lg { box-shadow: var(--shadow-lg); }
+.shadow-xl { box-shadow: var(--shadow-xl); }
+
+/* =========================================
+   TYPOGRAPHY UTILITIES
+   ========================================= */
+.text-center  { text-align: center; }
+.text-left    { text-align: left; }
+.text-right   { text-align: right; }
+
+.font-light    { font-weight: 300; }
+.font-normal   { font-weight: 400; }
+.font-medium   { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold     { font-weight: 700; }
+
+.italic       { font-style: italic; }
+.list-none    { list-style: none; }
+.uppercase    { text-transform: uppercase; }
+.tracking-wide{ letter-spacing: 0.05em; }
+
+/* =========================================
+   ANIMATIONS
+   ========================================= */
 .fade-in {
-  animation: fadeIn 0.8s ease-in forwards;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* =========================================
+   HERO BADGE
+   ========================================= */
+.hero-badge.badge-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+  background: rgba(10, 25, 47, 0.05);
+}
+
+/* =========================================
+   WHATSAPP BUTTON
+   z-index raised to 1100 so it always
+   sits above navbars and modals at 1000.
+   ========================================= */
+.whatsapp-btn {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background-color: #25D366;
+  color: white;
+  width: 60px;
+  height: 60px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: var(--shadow-lg);
+  z-index: 1100;
+  transition: var(--transition-transform);
+}
+.whatsapp-btn:hover {
+  transform: scale(1.1);
+  box-shadow: var(--shadow-xl);
+}
+
+/* =========================================
+   LOGO SLIDER
+   ========================================= */
+.logo-slider-container {
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  padding: 1rem 0;
+  isolation: isolate;
+}
+
+.logo-slider-container::before,
+.logo-slider-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  width: 150px;
+  height: 100%;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.logo-slider-container::before {
+  left: 0;
+  background: linear-gradient(to right, var(--background) 0%, transparent 100%);
+}
+.logo-slider-container::after {
+  right: 0;
+  background: linear-gradient(to left, var(--background) 0%, transparent 100%);
+}
+
+.logo-track {
+  display: inline-flex;
+  gap: 3rem;
+  width: max-content;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo-track         { animation: slide 35s linear infinite; }
+  .logo-track.reverse { animation: slide-reverse 40s linear infinite; }
+}
+
+.logo-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes slide {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes slide-reverse {
+  0%   { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
+
+.client-logo-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 90px;
+  width: 220px;
+  background: white;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  color: var(--foreground-light);
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: var(--transition-transform), box-shadow 0.3s ease,
+              border-color 0.2s ease, color 0.2s ease;
+  cursor: pointer;
+}
+
+.client-logo-box:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--secondary);
+  color: var(--primary);
+  transform: translateY(-2px);
+}
+
+.client-img {
+  max-width: 160px;
+  max-height: 60px;
+  object-fit: contain;
+  transition: transform 0.3s ease;
+}
+
+.client-logo-box:hover .client-img {
+  transform: scale(1.08);
+}
+
+
+/* =========================================
+   MISSING UTILITIES (referenced in JSX)
+   ========================================= */
+
+/* Spacing — mb-16 / mt-16 / mb-20 were used in JSX but undefined */
+.mb-16 { margin-bottom: 4rem; }
+.mt-16 { margin-top: 4rem; }
+.mb-20 { margin-bottom: 5rem; }
+.mt-20 { margin-top: 5rem; }
+
+/* Max-width constraints */
+.max-w-3xl { max-width: 48rem; }
+.max-w-2xl { max-width: 42rem; }
+.max-w-xl  { max-width: 36rem; }
+
+/* Center auto margin */
+.mx-auto { margin-left: auto; margin-right: auto; }
+
+/* Position utilities — used in CTASection ("relative z-10") */
+.relative { position: relative; }
+.absolute { position: absolute; }
+.z-10  { z-index: 10; }
+.z-20  { z-index: 20; }
+.z-100 { z-index: 100; }
+
+/* gap-md alias — widely used in JSX; maps to standard gap-8 */
+.gap-md { gap: 2rem; }
+
+/* =========================================
+   INDUSTRIES SECTION SPACING
+   Replaces the inline style overrides that
+   were breaking the spacing rhythm.
+   ========================================= */
+.industries-stats {
+  /* Reduce bottom padding so slider section feels connected */
+  padding-bottom: 2.5rem;
+}
+
+.industries-logos {
+  padding-top: 2.5rem;
+  padding-bottom: 4rem;
+  overflow: hidden;
 }

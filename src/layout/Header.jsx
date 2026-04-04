@@ -24,7 +24,7 @@ const Header = () => {
             <span className="info-item"><Phone size={14} /> +91 98765 43210</span>
           </div>
           <div className="top-bar-right">
-            <span className="info-item"><MapPin size={14} /> Your City, India</span>
+            <span className="info-item"><MapPin size={14} /> New Delhi, India</span>
           </div>
         </div>
       </div>
@@ -47,6 +47,7 @@ const Header = () => {
         <div className="desktop-menu">
           <NavLink to="/" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Home</NavLink>
           <NavLink to="/about" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>About Us</NavLink>
+          <NavLink to="/team" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Our Team</NavLink>
           <NavLink to="/services" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Services</NavLink>
           <NavLink to="/insights" className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}>Insights</NavLink>
           <Link to="/contact" className="btn btn-primary ml-4">Get Consultation</Link>
@@ -63,6 +64,7 @@ const Header = () => {
         <div className="mobile-menu fade-in">
           <NavLink to="/" onClick={() => setIsMenuOpen(false)} className="mobile-link">Home</NavLink>
           <NavLink to="/about" onClick={() => setIsMenuOpen(false)} className="mobile-link">About Us</NavLink>
+          <NavLink to="/team" onClick={() => setIsMenuOpen(false)} className="mobile-link">Our Team</NavLink>
           <NavLink to="/services" onClick={() => setIsMenuOpen(false)} className="mobile-link">Services</NavLink>
           <NavLink to="/insights" onClick={() => setIsMenuOpen(false)} className="mobile-link">Insights</NavLink>
           <Link to="/contact" onClick={() => setIsMenuOpen(false)} className="btn btn-primary mt-4">Get Consultation</Link>

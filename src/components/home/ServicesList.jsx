@@ -72,9 +72,6 @@ const ServicesList = () => {
     <section className="section services-bg">
       <div className="container">
         <div className="text-center mb-8">
-          <div className="hero-badge" style={{ color: 'var(--primary)', borderColor: 'var(--primary)' }}>
-            Our Expertise
-          </div>
           <h2 className="section-title">Comprehensive Financial Services</h2>
           <p className="section-subtitle">
             Delivering precision, compliance, and growth-oriented solutions tailored for your business.
@@ -82,7 +79,7 @@ const ServicesList = () => {
         </div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -98,12 +95,6 @@ const ServicesList = () => {
               </Link>
             </motion.div>
           ))}
-          
-          <motion.div className="service-card" style={{ display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', textAlign: 'center', backgroundColor: 'var(--primary)', color: 'white' }} variants={itemVariants}>
-            <h3 style={{ color: 'white', marginBottom: '1rem', fontFamily: 'Inter', fontSize: '1.25rem' }}>Need Custom Financial Solutions?</h3>
-            <p style={{ color: '#cbd5e1', marginBottom: '1.5rem', fontSize: '0.95rem' }}>Talk to our experts today to formulate the right strategy.</p>
-            <Link to="/contact" className="btn btn-secondary" style={{ width: '100%' }}>Get Consultation</Link>
-          </motion.div>
         </motion.div>
       </div>
     </section>
